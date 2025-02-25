@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>10th Standard Biology Chatbot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .chat-container {
+      width: 80%;
+      margin: 40px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .chat-header {
+      background-color: #f0f0f0;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    .chat-header h2 {
+      margin-top: 0;
+    }
+    .chat-messages {
+      padding: 20px;
+    }
+    .chat-message {
+      margin-bottom: 20px;
+    }
+    .chat-message .message-text {
+      font-size: 16px;
+    }
+    .chat-message .message-author {
+      font-size: 14px;
+      color: #666;
+    }
+    .chat-input {
+      padding: 10px;
+      border-top: 1px solid #ddd;
+    }
+    .chat-input input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+    }
+    .chat-input button[type="submit"] {
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .chat-input button[type="submit"]:hover {
+      background-color: #3e8e41;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">
+      <h2>10th Standard Biology Chatbot</h2>
+    </div>
+    <div class="chat-messages">
+      <!-- chat messages will be displayed here -->
+    </div>
+    <div class="chat-input">
+      <input type="text" id="user-input" placeholder="Ask a question...">
+      <button type="submit" id="submit-btn">Ask</button>
+    </div>
+  </div>
+
+  <script>
+    const chatMessages = document.querySelector('.chat-messages');
+    const userInput = document.querySelector('#user-input');
+    const submitBtn = document.querySelector('#submit-btn');
+
+    // questions and answers database
+    const qaDatabase = [
+      {
+        question: "What is the process of photosynthesis?",
+        answer: "Photosynthesis is the process by which green plants, algae, and some bacteria convert light energy from the sun into chemical energy in the form of organic compounds, such as glucose."
+      },
+      {
+        question: "What is the function of the mitochondria?",
+        answer: "The mitochondria is the powerhouse of the cell, responsible for generating energy for the cell through the process of cellular respiration."
+      },
+      {
+        question: "what is the biology?",
+        answer: "Biology is the natural science that studies living organisms and their interactions with each other and their environment. It is a vast and diverse field that encompasses various disciplines, including botany, zoology, microbiology, ecology, evolution, genetics, biochemistry, and molecular biology. Branches of Biology  Botany: The study of plants, including their structure, growth, evolution, classification, and distribution.Zoology: The study of animals, including their structure, behavior, evolution, classification, and distribution."
+      },
+
+      {
+        question: "What is the function of of tree",
+        answer: "The Tree is very helpful for living human life with help of oxygen."
+      },
+
+
+
+
+
+
+
+      // add more questions and answers here
+    ];
+
+    submitBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const userQuestion = userInput.value.trim();
+      if (userQuestion !== '') {
+        const answer = getAnswer(userQuestion);
+        if (answer !== '') {
+          displayMessage(`You: ${userQuestion}`);
+          displayMessage(`Chatbot: ${answer}`);
+        } else {
+          displayMessage(`You: ${userQuestion}`);
+          displayMessage(`Chatbot: Sorry, I don't know the answer to that question.`);
+        }
+        userInput.value = '';
+      }
+    });
+
+    function getAnswer(question) {
+      for (let i = 0; i < qaDatabase.length; i++) {
+        if (qaDatabase[i].question.toLowerCase() === question.toLowerCase()) {
+          return qaDatabase[i].answer;
+        }
+      }
+      return '';
+    }
+
+    function displayMessage(message) {
+      const messageHTML = `
+        <div class="chat-message">
+          <span class="message-author">${message.split(':')[0]}</span>
+          <span class="message-text">${message.split(':')[1]}</span>
+        </div>
+      `;
+      chatMessages.innerHTML += messageHTML;
+    }
+  </script>
+</body>
+</html>
